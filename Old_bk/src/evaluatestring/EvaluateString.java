@@ -24,74 +24,7 @@ public class EvaluateString {
         this.varMap = new HashMap<String, LinkedList<Integer>>();
     }
 
-    public int evaluate(String expression) {
-        try {
-            expression = expression.replaceAll("\\s", "");
-
-            if (expression.matches("[a-zA-z]+")) {
-                if (varMap.containsKey(expression)) {
-                    return varMap.get(expression).peek();
-                } else {
-                    throw new IllegalArgumentException("The variable in let is not found");
-                }
-
-            }
-            if (isNumeric(expression)) {
-                return Integer.parseInt(expression);
-            }
-            if (expression.startsWith("add")) {
-
-                String[] arrAdd = returnStringExp(expression.substring(4, expression.length() - 1));
-                return evaluate(arrAdd[0]) + evaluate(arrAdd[1]);
-
-            }
-            if (expression.startsWith("sub")) {
-                String[] arrAdd = returnStringExp(expression.substring(4, expression.length() - 1));
-                return evaluate(arrAdd[0]) - evaluate(arrAdd[1]);
-            }
-            if (expression.startsWith("mult")) {
-                String[] arrAdd = returnStringExp(expression.substring(5, expression.length() - 1));
-                return evaluate(arrAdd[0]) * evaluate(arrAdd[1]);
-            }
-            if (expression.startsWith("div")) {
-
-                String[] arrAdd = returnStringExp(expression.substring(4, expression.length() - 1));
-                return evaluate(arrAdd[0]) / evaluate(arrAdd[1]);
-            }
-            if (expression.startsWith("let")) {
-                String[] arrAdd = returnStringExp2(expression.substring(4, expression.length() - 1));
-                String label = arrAdd[0];
-                String expr1 = arrAdd[1];
-                String expr2 = arrAdd[2];
-
-                int valExpr1 = evaluate(expr1);
-                LinkedList<Integer> currStack;
-                if (!varMap.containsKey(label)) {
-                    currStack = new LinkedList<Integer>();
-                    varMap.put(label, currStack);
-                }
-                varMap.get(label).push(valExpr1);
-
-                int valExpr2 = evaluate(expr2);
-
-                LinkedList<Integer> prevStack = varMap.get(label);
-                prevStack.pop();
-                if (prevStack.isEmpty()) {
-                    varMap.remove(label);
-                }
-
-                return valExpr2;
-
-            }
-        } catch (Exception e) {
-            logger.error(e);
-        }
-
-        return 0;
-
-    }
-
-    public static boolean isNumeric(String expression) {
+    public boolean isNumeric(String expression) {
         try {
             int d = Integer.parseInt(expression);
         } catch (NumberFormatException nfe) {
@@ -100,7 +33,7 @@ public class EvaluateString {
         return true;
     }
 
-    public static String[] returnStringExp(String expression) {
+    public String[] returnStringExp(String expression) {
 
         if (logger.isDebugEnabled()) {
             logger.debug("String expression = " + expression);
@@ -193,7 +126,7 @@ public class EvaluateString {
         return strArr;
     }
 
-    public static String[] returnStringExp2(String expression) {
+    public String[] returnStringExp2(String expression) {
 
         String strArr[] = new String[3];
         char temp[] = expression.toCharArray();
@@ -280,6 +213,73 @@ public class EvaluateString {
         return strArr;
     }
 
+    public int evaluate(String expression) {
+        try {
+            expression = expression.replaceAll("\\s", "");
+
+            if (expression.matches("[a-zA-z]+")) {
+                if (varMap.containsKey(expression)) {
+                    return varMap.get(expression).peek();
+                } else {
+                    throw new IllegalArgumentException("The variable in let is not found");
+                }
+
+            }
+            if (isNumeric(expression)) {
+                return Integer.parseInt(expression);
+            }
+            if (expression.startsWith("add")) {
+
+                String[] arrAdd = returnStringExp(expression.substring(4, expression.length() - 1));
+                return evaluate(arrAdd[0]) + evaluate(arrAdd[1]);
+
+            }
+            if (expression.startsWith("sub")) {
+                String[] arrAdd = returnStringExp(expression.substring(4, expression.length() - 1));
+                return evaluate(arrAdd[0]) - evaluate(arrAdd[1]);
+            }
+            if (expression.startsWith("mult")) {
+                String[] arrAdd = returnStringExp(expression.substring(5, expression.length() - 1));
+                return evaluate(arrAdd[0]) * evaluate(arrAdd[1]);
+            }
+            if (expression.startsWith("div")) {
+
+                String[] arrAdd = returnStringExp(expression.substring(4, expression.length() - 1));
+                return evaluate(arrAdd[0]) / evaluate(arrAdd[1]);
+            }
+            if (expression.startsWith("let")) {
+                String[] arrAdd = returnStringExp2(expression.substring(4, expression.length() - 1));
+                String label = arrAdd[0];
+                String expr1 = arrAdd[1];
+                String expr2 = arrAdd[2];
+
+                int valExpr1 = evaluate(expr1);
+                LinkedList<Integer> currStack;
+                if (!varMap.containsKey(label)) {
+                    currStack = new LinkedList<Integer>();
+                    varMap.put(label, currStack);
+                }
+                varMap.get(label).push(valExpr1);
+
+                int valExpr2 = evaluate(expr2);
+
+                LinkedList<Integer> prevStack = varMap.get(label);
+                prevStack.pop();
+                if (prevStack.isEmpty()) {
+                    varMap.remove(label);
+                }
+
+                return valExpr2;
+
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+
+        return 0;
+
+    }
+
     // Driver method to test above methods
 }
 
@@ -294,14 +294,19 @@ class Tester {
     public static void main(String[] args) {
 
         EvaluateString obj = new EvaluateString();
-        //obj.evaluate("add(1,2)"); 
-        System.out.println("Answer is--> " + obj.evaluate("add(1, 2)"));
-        System.out.println("Answer is--> " + obj.evaluate("add(1, mult(2, 3))"));
-        System.out.println("Answer is--> " + obj.evaluate("mult(add(2, 2), div(9, 3))"));
-        System.out.println("Answer is--> " + obj.evaluate("let(a, 5, add(a, a))"));
-        System.out.println("Answer is--> " + obj.evaluate("let(a, 5, let(b, mult(a, 10), add(b, a)))"));
-        System.out.println("Answer is--> " + obj.evaluate("let(a, let(b, 10, add(b, b)), let(b, 20, add(a, b)))"));
+        try {
+            if (args.length < 1 || args.length > 1) {
+                throw new IllegalArgumentException("Error");
+            }
+        } catch (Exception e) {
+            obj.logger.error(e);
+            return;
+        }
+
+       //obj.evaluate("add(1,2)");
+        System.out.println(obj.evaluate(args[0]));
 
     }
 
+    //obj.evaluate("add(1,2)"); 
 }
