@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="6" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="132" started-at="2017-08-21T06:14:57Z" finished-at="2017-08-21T06:14:57Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="132" started-at="2017-08-21T06:14:57Z" finished-at="2017-08-21T06:14:57Z">
+      <class name="com.neu.commandlncalculatorTest.CommanLnCalcTest">
+        <test-method status="PASS" signature="testEvaluate1()[pri:0, instance:testEvaluate1(com.neu.commandlncalculatorTest.CommanLnCalcTest)]" name="testEvaluate1" duration-ms="20" started-at="2017-08-21T02:14:57Z" finished-at="2017-08-21T02:14:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEvaluate1 -->
+        <test-method status="PASS" signature="testEvaluate5()[pri:0, instance:testEvaluate5(com.neu.commandlncalculatorTest.CommanLnCalcTest)]" name="testEvaluate5" duration-ms="0" started-at="2017-08-21T02:14:57Z" finished-at="2017-08-21T02:14:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEvaluate5 -->
+        <test-method status="PASS" signature="testEvaluate4()[pri:0, instance:testEvaluate4(com.neu.commandlncalculatorTest.CommanLnCalcTest)]" name="testEvaluate4" duration-ms="0" started-at="2017-08-21T02:14:57Z" finished-at="2017-08-21T02:14:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEvaluate4 -->
+        <test-method status="PASS" signature="testEvaluate3()[pri:0, instance:testEvaluate3(com.neu.commandlncalculatorTest.CommanLnCalcTest)]" name="testEvaluate3" duration-ms="0" started-at="2017-08-21T02:14:57Z" finished-at="2017-08-21T02:14:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEvaluate3 -->
+        <test-method status="PASS" signature="testEvaluate2()[pri:0, instance:testEvaluate2(com.neu.commandlncalculatorTest.CommanLnCalcTest)]" name="testEvaluate2" duration-ms="0" started-at="2017-08-21T02:14:57Z" finished-at="2017-08-21T02:14:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEvaluate2 -->
+        <test-method status="PASS" signature="testEvaluate6()[pri:0, instance:testEvaluate6(com.neu.commandlncalculatorTest.CommanLnCalcTest)]" name="testEvaluate6" duration-ms="0" started-at="2017-08-21T02:14:57Z" finished-at="2017-08-21T02:14:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEvaluate6 -->
+      </class> <!-- com.neu.commandlncalculatorTest.CommanLnCalcTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
